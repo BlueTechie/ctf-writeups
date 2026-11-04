@@ -1,0 +1,21 @@
+services:
+  app:
+    build: ./challenge
+    read_only: true
+    tmpfs:
+      - /tmp:exec,mode=1777
+    mem_limit: 128m
+    cap_drop:
+      - ALL
+    cpus: 0.5
+    pids_limit: 128
+    ulimits:
+      nofile:
+        soft: 1024
+        hard: 1024
+    restart: unless-stopped
+    environment:
+      FLAG: flagbot{local_example_only}
+    ports:
+      - 8000:8000
+
